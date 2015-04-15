@@ -50,7 +50,7 @@ def save_news_item(page, domain)
 
   p record
 
-  # ScraperWiki.save_sqlite([:id], record)
+  ScraperWiki.save_sqlite([:id], record)
 end
 
 agent = Mechanize.new
