@@ -34,6 +34,8 @@ def save_news_item(page, domain)
 
   # Build Array of attached files and links listed
   # at the end of the post
+  # TODO: put in catch for .announcementpdf
+  # see http://www.santos.com/Archive/NewsDetail.aspx?p=121&id=84
   attached_files = post_div.search('.filelist').any? ? post_div.at('.filelist').search(:a).map { |a| make_url_absolute(a.attr(:href), domain) } : nil
 
 
