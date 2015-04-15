@@ -49,11 +49,14 @@ end
 agent = Mechanize.new
 
 base_url = 'http://www.santos.com'
-page_address = '/Archive/NewsDetail.aspx?p=121&id=1485'
 
-page = agent.get(base_url + page_address)
+index = agent.get("http://www.santos.com/share-price-performance/news-announcements.aspx")
 
-save_news_item(page, base_url)
+index.search('.article .title a').each do |link|
+  news_page = agent.get(base_url + link.attr(:href))
+  puts "Saving #{link.inner_text}:\n#{news_page.uri.to_s}"
+  save_news_item(news_page, base_url)
+end
 
 # # Write out to the sqlite database using scraperwiki library
 # ScraperWiki.save_sqlite(["name"], {"name" => "susan", "occupation" => "software developer"})
