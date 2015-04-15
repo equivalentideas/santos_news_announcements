@@ -10,7 +10,6 @@ require 'mechanize'
 # end
 
 def trim_item_body(post)
-  # TODO: test this works across posts
   post.children[0...3].remove
   post.search('p.backlink').remove
 
