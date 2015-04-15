@@ -34,7 +34,8 @@ def save_news_item(page, domain)
 
   # Build Array of attached files and links listed
   # at the end of the post
-  attached_files = post_div.at('.filelist').search(:a).map { |a| make_url_absolute(a.attr(:href), domain) }
+  attached_files = post_div.search('.filelist').any? ? post_div.at('.filelist').search(:a).map { |a| make_url_absolute(a.attr(:href), domain) } : nil
+
 
   record = {
     id: id,
