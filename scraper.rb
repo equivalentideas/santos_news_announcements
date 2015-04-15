@@ -14,7 +14,7 @@ def trim_item_body(post)
   post.search('p.backlink').remove
 
   # TODO: convert to markdown
-  return post.to_html
+  return post.inner_html
 end
 
 def make_url_absolute(url, domain)
