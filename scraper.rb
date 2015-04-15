@@ -18,6 +18,10 @@ def trim_item_body(post)
   return post.to_html
 end
 
+def make_url_absolute(url, domain)
+  url[0] == "/" ? domain + url : url
+end
+
 def save_news_item(page, domain)
   url = page.uri.to_s
 
@@ -29,8 +33,9 @@ def save_news_item(page, domain)
 
   item_body_html = trim_item_body(post_div)
 
-  # Build Array of attached files
-  attached_files = post_div.at('.filelist').search(:a).map { |a| domain + a.attr(:href) }
+  # Build Array of attached files and links listed
+  # at the end of the post
+  attached_files = post_div.at('.filelist').search(:a).map { |a| make_url_absolute(a.attr(:href), domain) }
 
   record = {
     id: id,
