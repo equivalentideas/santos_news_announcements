@@ -3,17 +3,11 @@
 
 require 'scraperwiki'
 require 'mechanize'
-# require 'redcarpet'
-
-# def markdown(html)
-#   Redcarpet.new(html).html_safe
-# end
 
 def trim_item_body(post)
   post.children[0...3].remove
   post.search('p.backlink').remove
 
-  # TODO: convert to markdown
   return post.inner_html
 end
 
