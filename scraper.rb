@@ -23,7 +23,7 @@ def save_news_item(page, domain)
 
   post_div = page.at('div.content + div.content')
 
-  pub_date = post_div.search(:h2)[0] ? post_div.search(:h2)[0].text : nil
+  pub_date = post_div.search(:h2)[0] ? Date.strptime(post_div.search(:h2)[0].text, '%d %b %Y').to_s : nil
 
   item_body_html = trim_item_body(post_div)
 
