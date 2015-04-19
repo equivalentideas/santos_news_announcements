@@ -4,6 +4,7 @@
 require 'scraperwiki'
 require 'mechanize'
 
+# TODO: strip whitespace from the end
 def trim_item_body(post)
   post.children[0...3].remove
   post.search('p.backlink').remove
