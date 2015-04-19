@@ -35,12 +35,12 @@ def save_news_item(page, domain)
 
 
   record = {
-    id: id,
-    url: url,
-    item_title: page.search('h1.pagetitle').text,
     pub_date: pub_date,
+    item_title: page.search('h1.pagetitle').text,
+    item_body: item_body_html,
     attached_files: attached_files,
-    item_body: item_body_html
+    url: url,
+    id: id
   }
 
   p record
