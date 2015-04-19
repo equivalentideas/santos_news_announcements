@@ -27,12 +27,20 @@ def save_news_item(page, domain)
 
   item_body_html = trim_item_body(post_div)
 
-  # Build Array of attached files and links listed
-  # at the end of the post
-  # TODO: put in catch for .announcementpdf
-  # see http://www.santos.com/Archive/NewsDetail.aspx?p=121&id=84
-  attached_files = post_div.search('.filelist').any? ? post_div.at('.filelist').search(:a).map { |a| make_url_absolute(a.attr(:href), domain) }.join("','") : nil
+  # Build string from array of attached files and links listed
+  # at the end of the post.
+  # We need to test for two different ways they attach files
+  # sometimes both are present.
+  if post_div.search('.filelist').any? || post_div.search('.announcementpdf').any?
+    file_links = []
+    file_links.push post_div.search('.filelist a')
+    file_links.push post_div.search('.announcementpdf a')
 
+    attached_files = attachment_links.map { |a| make_url_absolute(a.attr(:href), domain) }.join("','")
+  else
+    attached_files = nil
+    puts "no attached files found"
+  end
 
   record = {
     pub_date: pub_date,
