@@ -33,10 +33,16 @@ def save_news_item(page, domain)
   # sometimes both are present.
   if post_div.search('.filelist').any? || post_div.search('.announcementpdf').any?
     file_links = []
-    file_links.push post_div.search('.filelist a')
-    file_links.push post_div.search('.announcementpdf a')
 
-    attached_files = attachment_links.map { |a| make_url_absolute(a.attr(:href), domain) }.join("','")
+    if post_div.search('.filelist').any?
+      file_links.push post_div.search('.filelist a')
+    end
+
+    if post_div.search('.announcementpdf a').any?
+      file_links.push post_div.search('.announcementpdf a')
+    end
+
+    attached_files = file_links.map { |a| make_url_absolute(a.attr(:href.to_s), domain) }.join("','")
   else
     attached_files = nil
     puts "no attached files found"
