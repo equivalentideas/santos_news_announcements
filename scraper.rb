@@ -66,7 +66,7 @@ agent = Mechanize.new
 
 base_url = 'http://www.santos.com'
 
-index = agent.get("http://www.santos.com/share-price-performance/news-announcements.aspx")
+index = agent.get(base_url + '/share-price-performance/news-announcements.aspx?y=0')
 
 index.search('.article .title a').each do |link|
   news_page = agent.get(base_url + link.attr(:href))
