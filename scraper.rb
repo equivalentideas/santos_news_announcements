@@ -69,7 +69,7 @@ index = agent.get(base_url + '/share-price-performance/news-announcements.aspx?y
 index.search('.article .title a').each do |link|
   news_page = agent.get(base_url + link.attr(:href))
 
-  if !ScraperWiki.select("url from swdata where url='#{base_url + link.attr(:href)}'").empty?
+  if !ScraperWiki.select("url from data where url='#{base_url + link.attr(:href)}'").empty?
     puts "Skipping already saved post #{base_url + link.attr(:href)}"
   else
     save_news_item(news_page, base_url)
