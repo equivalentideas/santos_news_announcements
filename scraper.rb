@@ -57,8 +57,6 @@ def save_news_item(page, domain)
     id: id
   }
 
-  p record
-
   ScraperWiki.save_sqlite([:id], record)
 end
 
