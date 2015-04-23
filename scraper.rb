@@ -57,6 +57,7 @@ def save_news_item(page, domain)
     id: id
   }
 
+  puts "Saving post #{record[:id]} #{record[:url]}"
   ScraperWiki.save_sqlite([:id], record)
 end
 
@@ -68,7 +69,6 @@ index = agent.get(base_url + '/share-price-performance/news-announcements.aspx?y
 
 index.search('.article .title a').each do |link|
   news_page = agent.get(base_url + link.attr(:href))
-  puts "Saving #{link.inner_text}:\n#{news_page.uri.to_s}"
   save_news_item(news_page, base_url)
 end
 
