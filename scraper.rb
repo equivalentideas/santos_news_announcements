@@ -45,7 +45,6 @@ def save_news_item(page, domain)
     attached_files = file_links.map { |a| make_url_absolute(a.attr(:href.to_s), domain) }.join("','")
   else
     attached_files = nil
-    puts "no attached files found"
   end
 
   record = {
